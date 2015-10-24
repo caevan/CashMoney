@@ -49,18 +49,18 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="600" id="P0T-TT-epX"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="qUf-9E-b3f">
-                                    <size key="itemSize" width="106" height="108"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="qUf-9E-b3f">
+                                    <size key="itemSize" width="126" height="108"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="cM0-kk-rED">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CurrencyCollectionViewCell" id="cM0-kk-rED" customClass="CurrencyCollectionViewCell" customModule="Cash_Money" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="106" height="108"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="106" height="108"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="126" height="108"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="JPY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T2i-2T-QeI">
@@ -68,29 +68,35 @@
                                                     <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="56"/>
                                                     <color key="textColor" red="0.2274509804" green="0.80784313730000001" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="7" y="32" width="106" height="44"/>
+                                                    </variation>
                                                 </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="T2i-2T-QeI" firstAttribute="leading" secondItem="cM0-kk-rED" secondAttribute="leading" id="6Dt-7J-pvc"/>
                                             <constraint firstItem="T2i-2T-QeI" firstAttribute="centerY" secondItem="cM0-kk-rED" secondAttribute="centerY" id="KbC-Du-xtI"/>
                                             <constraint firstItem="T2i-2T-QeI" firstAttribute="top" secondItem="cM0-kk-rED" secondAttribute="topMargin" constant="24" id="sxh-34-JAH"/>
+                                            <constraint firstItem="T2i-2T-QeI" firstAttribute="centerX" secondItem="cM0-kk-rED" secondAttribute="centerX" id="uZZ-tF-ePr"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="6Dt-7J-pvc"/>
                                                 <exclude reference="KbC-Du-xtI"/>
                                                 <exclude reference="sxh-34-JAH"/>
+                                                <exclude reference="uZZ-tF-ePr"/>
                                             </mask>
                                         </variation>
                                         <variation key="heightClass=regular-widthClass=compact">
                                             <mask key="constraints">
-                                                <include reference="6Dt-7J-pvc"/>
                                                 <include reference="KbC-Du-xtI"/>
                                                 <include reference="sxh-34-JAH"/>
+                                                <include reference="uZZ-tF-ePr"/>
                                             </mask>
                                         </variation>
+                                        <connections>
+                                            <outlet property="lblCurrency" destination="T2i-2T-QeI" id="8CN-ip-WyZ"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <variation key="default">
@@ -101,7 +107,7 @@
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
                                     <rect key="frame" x="0.0" y="289" width="400" height="108"/>
                                     <mask key="constraints">
-                                        <include reference="P0T-TT-epX"/>
+                                        <exclude reference="P0T-TT-epX"/>
                                     </mask>
                                 </variation>
                             </collectionView>
@@ -130,11 +136,22 @@
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Kj-o0-mat">
                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="47" id="cfQ-tS-Als"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="56"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="cfQ-tS-Als"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
                                     <rect key="frame" x="80" y="505" width="254" height="47"/>
+                                    <mask key="constraints">
+                                        <include reference="cfQ-tS-Als"/>
+                                    </mask>
                                 </variation>
                             </label>
                         </subviews>
@@ -152,8 +169,10 @@
                             <constraint firstItem="wYj-bB-eM0" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Xsy-dR-oZg"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="0qQ-C6-7FR" secondAttribute="bottom" constant="338" id="ZZ9-xn-Ml4"/>
                             <constraint firstItem="6a1-rU-NL6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="acd-Nw-1ib"/>
+                            <constraint firstItem="6Kj-o0-mat" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fiG-bt-kWg"/>
                             <constraint firstItem="qCq-y1-54C" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="gtJ-8j-wcZ"/>
                             <constraint firstItem="9v2-ne-plP" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="i9I-1c-xPZ"/>
+                            <constraint firstItem="0qQ-C6-7FR" firstAttribute="centerX" secondItem="A9Q-QF-SJN" secondAttribute="centerX" id="kOK-jo-jeU"/>
                             <constraint firstItem="9v2-ne-plP" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="kQq-5D-D8q"/>
                             <constraint firstItem="0qQ-C6-7FR" firstAttribute="top" secondItem="A9Q-QF-SJN" secondAttribute="top" id="lQw-ia-Uuw"/>
                             <constraint firstItem="6a1-rU-NL6" firstAttribute="bottom" secondItem="0qQ-C6-7FR" secondAttribute="bottom" id="lmZ-qv-Jzu"/>
@@ -161,7 +180,9 @@
                             <constraint firstItem="A9Q-QF-SJN" firstAttribute="top" secondItem="qCq-y1-54C" secondAttribute="bottom" constant="55" id="qEs-zL-tYS"/>
                             <constraint firstItem="6a1-rU-NL6" firstAttribute="top" secondItem="A9Q-QF-SJN" secondAttribute="bottom" constant="80" id="qXa-US-6HL"/>
                             <constraint firstItem="wYj-bB-eM0" firstAttribute="top" secondItem="9v2-ne-plP" secondAttribute="bottom" constant="26" id="rMV-wQ-bbK"/>
+                            <constraint firstItem="6Kj-o0-mat" firstAttribute="leading" secondItem="9v2-ne-plP" secondAttribute="leading" id="sRf-G9-i71"/>
                             <constraint firstItem="wYj-bB-eM0" firstAttribute="top" secondItem="9v2-ne-plP" secondAttribute="bottom" constant="49" id="uc7-zY-TAM"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="6Kj-o0-mat" secondAttribute="bottom" constant="248" id="ufy-ih-XOG"/>
                             <constraint firstItem="qCq-y1-54C" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="179" id="x78-pL-Jjf"/>
                         </constraints>
                         <variation key="default">
@@ -184,15 +205,19 @@
                                 <exclude reference="gtJ-8j-wcZ"/>
                                 <exclude reference="x78-pL-Jjf"/>
                                 <exclude reference="445-QG-aTH"/>
+                                <exclude reference="kOK-jo-jeU"/>
                                 <exclude reference="lQw-ia-Uuw"/>
                                 <exclude reference="DPm-lX-zc0"/>
                                 <exclude reference="qEs-zL-tYS"/>
                                 <exclude reference="acd-Nw-1ib"/>
                                 <exclude reference="lmZ-qv-Jzu"/>
                                 <exclude reference="qXa-US-6HL"/>
+                                <exclude reference="fiG-bt-kWg"/>
+                                <exclude reference="sRf-G9-i71"/>
                                 <exclude reference="IC4-bP-Ecc"/>
                                 <exclude reference="IKA-Kf-FaB"/>
                                 <exclude reference="ZZ9-xn-Ml4"/>
+                                <exclude reference="ufy-ih-XOG"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -209,16 +234,25 @@
                                 <include reference="gtJ-8j-wcZ"/>
                                 <include reference="x78-pL-Jjf"/>
                                 <include reference="445-QG-aTH"/>
+                                <include reference="kOK-jo-jeU"/>
                                 <include reference="lQw-ia-Uuw"/>
                                 <include reference="DPm-lX-zc0"/>
                                 <include reference="qEs-zL-tYS"/>
                                 <include reference="acd-Nw-1ib"/>
                                 <include reference="lmZ-qv-Jzu"/>
                                 <include reference="qXa-US-6HL"/>
+                                <include reference="fiG-bt-kWg"/>
+                                <include reference="sRf-G9-i71"/>
                                 <include reference="ZZ9-xn-Ml4"/>
+                                <include reference="ufy-ih-XOG"/>
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="currencyCollectionView" destination="0qQ-C6-7FR" id="W3r-n9-92E"/>
+                        <outlet property="txtFromCurrency" destination="qCq-y1-54C" id="siG-g6-pKJ"/>
+                        <outlet property="txtToCurrency" destination="6Kj-o0-mat" id="0BM-Iu-Y8i"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

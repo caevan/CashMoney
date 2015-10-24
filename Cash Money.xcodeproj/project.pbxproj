@@ -20,6 +20,7 @@
 		B9C95A811BDB988A0063972C /* CashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C95A801BDB988A0063972C /* CashViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		B9C95A841BDBACCD0063972C /* CashModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C95A831BDBACCD0063972C /* CashModel.swift */; settings = {ASSET_TAGS = (); }; };
 		B9C95A871BDBB6ED0063972C /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9C95A861BDBB6ED0063972C /* Media.xcassets */; settings = {ASSET_TAGS = (); }; };
+		B9C95A8A1BDBC4ED0063972C /* CurrencyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C95A891BDBC4ED0063972C /* CurrencyCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		B9C95A801BDB988A0063972C /* CashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CashViewController.swift; path = Controllers/CashViewController.swift; sourceTree = "<group>"; };
 		B9C95A831BDBACCD0063972C /* CashModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CashModel.swift; path = Models/CashModel.swift; sourceTree = "<group>"; };
 		B9C95A861BDBB6ED0063972C /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
+		B9C95A891BDBC4ED0063972C /* CurrencyCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CurrencyCollectionViewCell.swift; path = Cells/CurrencyCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 		B9C95A3C1BDB78110063972C = {
 			isa = PBXGroup;
 			children = (
+				B9C95A881BDBC4A20063972C /* Cells */,
 				B9C95A851BDBB6A60063972C /* Images */,
 				B9C95A821BDBAC7B0063972C /* Models */,
 				B9C95A7F1BDB97CF0063972C /* Controllers */,
@@ -181,6 +184,14 @@
 				B9C95A861BDBB6ED0063972C /* Media.xcassets */,
 			);
 			name = Images;
+			sourceTree = "<group>";
+		};
+		B9C95A881BDBC4A20063972C /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				B9C95A891BDBC4ED0063972C /* CurrencyCollectionViewCell.swift */,
+			);
+			name = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -316,6 +327,7 @@
 			files = (
 				B9C95A511BDB78110063972C /* Cash_Money.xcdatamodeld in Sources */,
 				B9C95A811BDB988A0063972C /* CashViewController.swift in Sources */,
+				B9C95A8A1BDBC4ED0063972C /* CurrencyCollectionViewCell.swift in Sources */,
 				B9C95A4B1BDB78110063972C /* ViewController.swift in Sources */,
 				B9C95A841BDBACCD0063972C /* CashModel.swift in Sources */,
 				B9C95A7B1BDB82CC0063972C /* CurrencyRepository.swift in Sources */,
