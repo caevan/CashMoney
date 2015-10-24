@@ -24,7 +24,9 @@ class Cash_MoneyTests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
+//        currencyRepository.
+        XCTAssertTrue(CurrencyRepository.GetCurrencyData() != false, "The table view should be set")
+   }
     
     func testPerformanceExample() {
         // This is an example of a performance test case.
