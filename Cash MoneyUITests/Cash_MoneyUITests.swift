@@ -30,7 +30,12 @@ class Cash_MoneyUITests: XCTestCase {
     
     func testExample() {
         // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        let app = XCUIApplication()
+        let enterValueTextField = app.textFields["Enter Value"]
+        enterValueTextField.tap()
+        enterValueTextField.typeText("2300")
+        app.toolbars.buttons["Close"].tap()
     }
     
 }

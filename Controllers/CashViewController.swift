@@ -40,9 +40,7 @@ class CashViewController: UIViewController, UICollectionViewDataSource, UICollec
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "RatesLoaded", name: ratesLoadedNotification, object: nil);
         self.getCurrencyRates()
         
-        let border = self.addDashedBorderWithColor(UIColor.blackColor().CGColor, textField: self.txtFromCurrency)
-        self.txtFromCurrency.layer.addSublayer(border)
-    }
+   }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -50,6 +48,22 @@ class CashViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+    }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let border = CAShapeLayer()
+        let width = CGFloat(2.0)
+        border.borderColor = UIColor.darkGrayColor().CGColor
+        border.frame = CGRect(x: 0, y: txtFromCurrency.frame.size.height - width, width:  txtFromCurrency.frame.size.width, height: txtFromCurrency.frame.size.height)
+        
+        border.borderWidth = width
+        border.lineDashPattern = [2, 1];
+        let newpath = UIBezierPath(rect: border.frame)
+        border.path = newpath.CGPath
+        
+        txtFromCurrency.layer.addSublayer(border)
+        txtFromCurrency.layer.masksToBounds = true
+
     }
     func RatesLoaded()
     {
@@ -131,13 +145,7 @@ class CashViewController: UIViewController, UICollectionViewDataSource, UICollec
             }
             else
             {
- /*               let totalCellWidth = collectionCellWidth * CGFloat(chooseCurrency.count);
-                let totalSpacingWidth = 2.0 * CGFloat(chooseCurrency.count-1);
-                
-                let inset = (viewWidth - (totalCellWidth + totalSpacingWidth)) / 2;
-                
-                return UIEdgeInsetsMake(0, inset, 0, inset);
-*/
+
                 if(currentCurrencyIndex < Int(itemsInFrame))
                 {
                     if(currentCurrencyIndex > Int(itemsInFrame/2)){
@@ -212,7 +220,10 @@ class CashViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     // Formats final value using current locale, e.g. "130,50" -> "$130", "120.70" -> "$120.70", "5" -> "$5.00"
     func textFieldDidEndEditing(textField: UITextField) {
-        let value = textField.text
+        var value = textField.text
+        if(value == ""){
+            value = "$0.00"
+        }
         let components = value!.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: "1234567890,.").invertedSet)
         let decimalString = components.joinWithSeparator("")
         
@@ -236,7 +247,7 @@ class CashViewController: UIViewController, UICollectionViewDataSource, UICollec
     */
     func currencyStringToDecimal(formatedString:String) -> NSDecimalNumber
     {
-        let components = formatedString.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: "1234567890,.").invertedSet)
+        let components = formatedString.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: "1234567890.").invertedSet)
         let decimalString = components.joinWithSeparator("")
         
         let number = NSDecimalNumber(string: decimalString, locale:NSLocale.currentLocale())
@@ -340,32 +351,13 @@ class CashViewController: UIViewController, UICollectionViewDataSource, UICollec
     func doneButtonClickedDismissKeyboard()
     {
         txtFromCurrency.resignFirstResponder();
+        if(txtFromCurrency.text == "NaN")
+        {
+            txtFromCurrency.text = "$0.00"
+        }
     }
 
-    func addDashedBorderWithColor(color:CGColorRef, textField: UITextField) ->CAShapeLayer {
-    let shapeLayer = CAShapeLayer();
-    
-    let frameSize = textField.frame.size;
-    
-    let shapeRect = CGRectMake(0.0, 0.0, frameSize.width, 1);
-    shapeLayer.bounds = shapeRect
-        shapeLayer.position = CGPointMake(textField.frame.origin.x,textField.frame.origin.y+frameSize.height)
-    shapeLayer.fillColor = UIColor.clearColor().CGColor
-        shapeLayer.strokeColor = color
-        shapeLayer.lineWidth = 5.0
-        shapeLayer.lineJoin = kCALineJoinRound
-//        shapeLayer.lineDashPattern = 1
-        shapeLayer.lineDashPattern = [4, 2];
-
-//     [NSArray arrayWithObjects:[NSNumber numberWithInt:10],
-//    [NSNumber numberWithInt:5],
-//    nil]];
-//    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:shapeRect cornerRadius:15.0];
-//    [shapeLayer setPath:path.CGPath];
-    
-    return shapeLayer;
-    }
-
+ 
     /*
     // MARK: - Navigation
 
