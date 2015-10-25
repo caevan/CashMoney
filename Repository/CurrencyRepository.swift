@@ -4,17 +4,20 @@
 //
 //  Created by Caevan Sachinwalla on 24/10/2015.
 //  Copyright © 2015 AMKD Pty Ltd. All rights reserved.
+//  class CurrencyRepository
+//  Class functions to retrieve the currency rates JSON data from the remote service
 //
 
 import UIKit
 import Foundation
 
-let currencyURL = "http://api.fixer.io/latest?base=AUD"
+private let currencyURL = "http://api.fixer.io/latest?base=AUD"
 
 class CurrencyRepository: NSObject {
     var rates:[String:NSNumber]?
     class func getCurencyFromServerWithSuccess(success: ((currencyData: NSData!) -> Void)) {
         //1
+        print("CurrencyRepository : currencyURL [\(currencyURL)]")
         CurrencyRepository.loadDataFromURL(NSURL(string: currencyURL)!, completion:{(data, error) -> Void in
             //2
             if let urlData = data {
@@ -42,19 +45,4 @@ class CurrencyRepository: NSObject {
         
         loadDataTask.resume()
     }
-    class func GetCurrencyData() -> Bool
-    {
-        CurrencyRepository.getCurencyFromServerWithSuccess { (currencyData) -> Void in
-            let json = JSON(data: currencyData)
-            print("getCurencyFromServerWithSuccess: \(json)")
-            let ratesValues = json["rates"]
-            print("getCurencyFromServerWithSuccess rates: \(ratesValues)")
-//            print("getCurencyFromServerWithSuccess rates: \(rates["USD"].string)")            CurrencyRepository.rates
-            if let currencyValue = json["rates"]["USD"].number {
-                print("NSURLSession: \(currencyValue)")
-            }
-            // More soon...
-        }
-        return false
-    }
-}
+ }

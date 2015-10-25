@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		B9C95A491BDB78110063972C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C95A481BDB78110063972C /* AppDelegate.swift */; };
-		B9C95A4B1BDB78110063972C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C95A4A1BDB78110063972C /* ViewController.swift */; };
 		B9C95A4E1BDB78110063972C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9C95A4C1BDB78110063972C /* Main.storyboard */; };
 		B9C95A511BDB78110063972C /* Cash_Money.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B9C95A4F1BDB78110063972C /* Cash_Money.xcdatamodeld */; };
 		B9C95A531BDB78110063972C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9C95A521BDB78110063972C /* Assets.xcassets */; };
@@ -18,7 +17,6 @@
 		B9C95A7B1BDB82CC0063972C /* CurrencyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C95A7A1BDB82CC0063972C /* CurrencyRepository.swift */; settings = {ASSET_TAGS = (); }; };
 		B9C95A7E1BDB8A920063972C /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C95A7D1BDB8A920063972C /* SwiftyJSON.swift */; settings = {ASSET_TAGS = (); }; };
 		B9C95A811BDB988A0063972C /* CashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C95A801BDB988A0063972C /* CashViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		B9C95A841BDBACCD0063972C /* CashModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C95A831BDBACCD0063972C /* CashModel.swift */; settings = {ASSET_TAGS = (); }; };
 		B9C95A871BDBB6ED0063972C /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9C95A861BDBB6ED0063972C /* Media.xcassets */; settings = {ASSET_TAGS = (); }; };
 		B9C95A8A1BDBC4ED0063972C /* CurrencyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C95A891BDBC4ED0063972C /* CurrencyCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
@@ -43,7 +41,6 @@
 /* Begin PBXFileReference section */
 		B9C95A451BDB78110063972C /* Cash Money.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cash Money.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9C95A481BDB78110063972C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B9C95A4A1BDB78110063972C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B9C95A4D1BDB78110063972C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B9C95A501BDB78110063972C /* Cash_Money.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Cash_Money.xcdatamodel; sourceTree = "<group>"; };
 		B9C95A521BDB78110063972C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -58,7 +55,6 @@
 		B9C95A7A1BDB82CC0063972C /* CurrencyRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CurrencyRepository.swift; path = Repository/CurrencyRepository.swift; sourceTree = "<group>"; };
 		B9C95A7D1BDB8A920063972C /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = JSON/SwiftyJSON.swift; sourceTree = "<group>"; };
 		B9C95A801BDB988A0063972C /* CashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CashViewController.swift; path = Controllers/CashViewController.swift; sourceTree = "<group>"; };
-		B9C95A831BDBACCD0063972C /* CashModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CashModel.swift; path = Models/CashModel.swift; sourceTree = "<group>"; };
 		B9C95A861BDBB6ED0063972C /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		B9C95A891BDBC4ED0063972C /* CurrencyCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CurrencyCollectionViewCell.swift; path = Cells/CurrencyCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -93,7 +89,6 @@
 			children = (
 				B9C95A881BDBC4A20063972C /* Cells */,
 				B9C95A851BDBB6A60063972C /* Images */,
-				B9C95A821BDBAC7B0063972C /* Models */,
 				B9C95A7F1BDB97CF0063972C /* Controllers */,
 				B9C95A7C1BDB8A4F0063972C /* JSON */,
 				B9C95A791BDB7B110063972C /* Repository */,
@@ -118,7 +113,6 @@
 			isa = PBXGroup;
 			children = (
 				B9C95A481BDB78110063972C /* AppDelegate.swift */,
-				B9C95A4A1BDB78110063972C /* ViewController.swift */,
 				B9C95A4C1BDB78110063972C /* Main.storyboard */,
 				B9C95A521BDB78110063972C /* Assets.xcassets */,
 				B9C95A541BDB78110063972C /* LaunchScreen.storyboard */,
@@ -168,14 +162,6 @@
 				B9C95A801BDB988A0063972C /* CashViewController.swift */,
 			);
 			name = Controllers;
-			sourceTree = "<group>";
-		};
-		B9C95A821BDBAC7B0063972C /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				B9C95A831BDBACCD0063972C /* CashModel.swift */,
-			);
-			name = Models;
 			sourceTree = "<group>";
 		};
 		B9C95A851BDBB6A60063972C /* Images */ = {
@@ -328,8 +314,6 @@
 				B9C95A511BDB78110063972C /* Cash_Money.xcdatamodeld in Sources */,
 				B9C95A811BDB988A0063972C /* CashViewController.swift in Sources */,
 				B9C95A8A1BDBC4ED0063972C /* CurrencyCollectionViewCell.swift in Sources */,
-				B9C95A4B1BDB78110063972C /* ViewController.swift in Sources */,
-				B9C95A841BDBACCD0063972C /* CashModel.swift in Sources */,
 				B9C95A7B1BDB82CC0063972C /* CurrencyRepository.swift in Sources */,
 				B9C95A7E1BDB8A920063972C /* SwiftyJSON.swift in Sources */,
 				B9C95A491BDB78110063972C /* AppDelegate.swift in Sources */,

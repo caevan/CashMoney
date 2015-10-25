@@ -14,6 +14,7 @@ private let chooseCurrency: [String] = ["CAD", "EUR", "GBP", "JPY", "USD"]
 private let collectionCellWidth:CGFloat = 126.0
 private let cashGreen = UIColor(red: 58/255, green: 206/255, blue: 128/255, alpha: 1)
 private let currencySign = "$"
+let ratesLoadedNotification = "ratesLoadedNotification"
 
 class CashViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITextFieldDelegate{
 
@@ -24,10 +25,7 @@ class CashViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     
     @IBOutlet weak var txtToCurrency: UILabel!
-    var currenncyRates:[String:NSNumber]?
     var currentCurrencyIndex:Int = 0;
-    var rates = [CashModel]()
-//    var cashRates: Dictionary<String, AnyObject>()
     var conversionRates = Dictionary<String,NSNumber?>();
 
 
@@ -38,6 +36,8 @@ class CashViewController: UIViewController, UICollectionViewDataSource, UICollec
         currencyCollectionView.dataSource = self;
         currencyCollectionView.delegate = self;
         txtFromCurrency.delegate = self;
+        self.addDoneToolBarToKeyboard(txtFromCurrency)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "RatesLoaded", name: ratesLoadedNotification, object: nil);
         self.getCurrencyRates()
         
         let border = self.addDashedBorderWithColor(UIColor.blackColor().CGColor, textField: self.txtFromCurrency)
@@ -50,9 +50,11 @@ class CashViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+    }
+    func RatesLoaded()
+    {
         convertCurrency(self.txtFromCurrency.text!)
     }
-    
     // MARK: UICollectionViewDataSource
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -87,6 +89,8 @@ class CashViewController: UIViewController, UICollectionViewDataSource, UICollec
         self.currencyCollectionView.collectionViewLayout = flowLayout
     }
      func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+ 
+            // Following code is required to correctly centre th selected item in the collectionview.
             let totalItems = chooseCurrency.count;
             
             let viewWidth:CGFloat = collectionView.frame.width;
@@ -104,8 +108,7 @@ class CashViewController: UIViewController, UICollectionViewDataSource, UICollec
                     else if(currentCurrencyIndex <= Int(itemsInFrame/2))
                     {
                         let inset = (viewWidth/2) - ((cellWidth+1)/2) - ((cellWidth+1)*CGFloat(currentCurrencyIndex))
- //                       let inset = (viewWidth/2) - ((cellWidth+1) * CGFloat(currentCurrencyIndex))
-                        return UIEdgeInsetsMake(0, inset, 0, 0)
+                       return UIEdgeInsetsMake(0, inset, 0, 0)
                         
                     }
                     else
@@ -113,13 +116,10 @@ class CashViewController: UIViewController, UICollectionViewDataSource, UICollec
                         return UIEdgeInsetsMake(0, 0, 0, 0)
                         
                     }
-                    //                   let inset = (viewWidth/2) - (cellWidth+1)
-                    //                   return UIEdgeInsetsMake(0, inset, 0, 0)
                     
                 }
                 else if((totalItems-currentCurrencyIndex) < Int(itemsInFrame)){
                     let inset = cellWidth+1
-//                    let inset = (viewWidth/2) - (cellWidth+1) * CGFloat(totalItems-currentCurrencyIndex)
                     return UIEdgeInsetsMake(0, 0, 0, inset)
                     
                 }
@@ -131,8 +131,43 @@ class CashViewController: UIViewController, UICollectionViewDataSource, UICollec
             }
             else
             {
-                let inset = viewWidth - itemsInFrame*(cellWidth+1)
-                return UIEdgeInsetsMake(0, inset/2, 0, inset/2)
+ /*               let totalCellWidth = collectionCellWidth * CGFloat(chooseCurrency.count);
+                let totalSpacingWidth = 2.0 * CGFloat(chooseCurrency.count-1);
+                
+                let inset = (viewWidth - (totalCellWidth + totalSpacingWidth)) / 2;
+                
+                return UIEdgeInsetsMake(0, inset, 0, inset);
+*/
+                if(currentCurrencyIndex < Int(itemsInFrame))
+                {
+                    if(currentCurrencyIndex > Int(itemsInFrame/2)){
+                        let inset = (viewWidth/2) - ((cellWidth+1)/2) - ((cellWidth+1) * CGFloat(Int(itemsInFrame)-(currentCurrencyIndex+2)))
+                        return UIEdgeInsetsMake(0, 0, 0, inset)
+                        
+                    }
+                    else if(currentCurrencyIndex <= Int(itemsInFrame/2))
+                    {
+                        let inset = (viewWidth/2) - ((cellWidth+1)/2) - ((cellWidth+1)*CGFloat(currentCurrencyIndex))
+                        return UIEdgeInsetsMake(0, inset, 0, 0)
+                        
+                    }
+                    else
+                    {
+                        return UIEdgeInsetsMake(0, 0, 0, 0)
+                        
+                    }
+                    
+                }
+                else if((totalItems-currentCurrencyIndex) < Int(itemsInFrame)){
+                    let inset = cellWidth+1
+                    return UIEdgeInsetsMake(0, 0, 0, inset)
+                    
+                }
+                else
+                {
+                    return UIEdgeInsetsMake(0,0, 0, 0)
+                    
+                }
                 
             }
         
@@ -195,7 +230,10 @@ class CashViewController: UIViewController, UICollectionViewDataSource, UICollec
             textField.text = ""
         }
     }
-    
+    /*
+    **  func currencyStringToDecimal(formatedString:String)
+    **  function takes a decimal formatted number and returns an NSDecimalNumber
+    */
     func currencyStringToDecimal(formatedString:String) -> NSDecimalNumber
     {
         let components = formatedString.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: "1234567890,.").invertedSet)
@@ -205,54 +243,40 @@ class CashViewController: UIViewController, UICollectionViewDataSource, UICollec
         
         return number
     }
-    /*   func collectionView(collectionView: UICollectionView,
-    layout collectionViewLayout: UICollectionViewLayout,
-    sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-    collectionViewLayout.invalidateLayout()
-    let photoFrameSize = CGSizeMake(photoCollectionView.frame.size.width, photoCollectionView.frame.size.height)
-    print("layout photoFrameSize [\(indexPath.row)]: \(photoFrameSize)")
-    return photoFrameSize
     
-    } */
+    //MARK: Currency function
+    /*
+    **     func getCurrencyRates()
+    **      Function retrieves the currency coversion rates and stores the rates
+    **      the dictionary conversionRates
+    */
     func getCurrencyRates()
     {
-//        var cashRates: Dictionary<String, AnyObject>
         CurrencyRepository.getCurencyFromServerWithSuccess { (currencyData) -> Void in
             let json = JSON(data: currencyData)
-            print("getCurencyFromServerWithSuccess: \(json)")
             if let ratesData = json["rates"].dictionary
             {
-                print("viewdidLoad rates: \(ratesData)")
                 
                 //3
                 for rate in ratesData {
-                    print("rate: \(rate) ")
                     let country:String? = rate.0
                     let countryRate:NSNumber? = rate.1.number
                     
-                    let cashRate = CashModel(country: country, rate: countryRate)
-                    self.rates.append(cashRate)
                     self.conversionRates[country!] = countryRate
                 }
-                print(self.rates)
-                let myRate = self.rates[0]
-                print(myRate.country)
-                //4
-                //                print(apps)
-                //                self.setupCollectionView()
                 
             }
-            print("All Rates \(self.conversionRates)")
-            self.currencyCollectionView.reloadData()
-            let myRate = self.conversionRates["USD"]
-            print("currency: \(myRate)")
-          
+            NSNotificationCenter.defaultCenter().postNotificationName(ratesLoadedNotification, object: self)
+         
             
-            if let currencyValue = json["rates"]["USD"].number {
-                print("NSURLSession: \(currencyValue)")
-            }
         }
     }
+    /*
+    **  func convertCurrency(fromCurrencyText:String)
+    **  Converts the value in the parameter fromCurrencyText:String
+    **  to the currency currently selected. Resulting text is place formatted and
+    **  placed in the txtToCurrency field
+    */
     func convertCurrency(fromCurrencyText:String){
         if let rate = self.conversionRates[chooseCurrency[currentCurrencyIndex]]{
             let fromCurrency = currencyStringToDecimal(fromCurrencyText)
@@ -262,6 +286,11 @@ class CashViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
 
     }
+    /*
+    **  formatCurrency(currencyValue:NSNumber, locale:String)
+    **  Formats the value in parameter currencyValue in the selected locale
+    **  Returns the formatted string
+    */
     func formatCurrency(currencyValue:NSNumber, locale:String) -> String
     {
         let formatter = NSNumberFormatter()
@@ -270,6 +299,13 @@ class CashViewController: UIViewController, UICollectionViewDataSource, UICollec
         return formatter.stringFromNumber(currencyValue)!
 
     }
+    /*
+    **   localeFromCode(countryCode:String) -> String
+    **   Converts the currency country code to a locale used by NSLocale
+    **   For EURO we only need the EURO symbol and the correct format so
+    **   any country locale which uses the Euro is suitable. Since Canada also uses the 
+    **   Dollar symbol US locale will suffice.
+    */
     func localeFromCode(countryCode:String) -> String
     {
         switch(countryCode)
@@ -282,6 +318,30 @@ class CashViewController: UIViewController, UICollectionViewDataSource, UICollec
         default: return "en_US"
         }
     }
+    /*
+    ** func addDoneToolBarToKeyboard(textView:UITextField)
+    ** functions adds a done or close button to the the keyboard of a designated
+    ** UITextfield
+    */
+    func addDoneToolBarToKeyboard(textView:UITextField)
+    {
+        let doneToolbar:UIToolbar =  UIToolbar(frame: CGRectMake(0, 0, 320, 50))
+        doneToolbar.barStyle = UIBarStyle.BlackTranslucent;
+        
+        doneToolbar.items = (NSArray(objects:UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil),UIBarButtonItem(title: "Close", style: UIBarButtonItemStyle.Done, target: self, action: Selector("doneButtonClickedDismissKeyboard"))) as! [UIBarButtonItem]);
+        doneToolbar.sizeToFit();
+        textView.inputAccessoryView = doneToolbar;
+        
+    }
+    /*
+    ** func doneButtonClickedDismissKeyboard()
+    ** OnClick function for keybord done button. Dismisses keyboard
+    */
+    func doneButtonClickedDismissKeyboard()
+    {
+        txtFromCurrency.resignFirstResponder();
+    }
+
     func addDashedBorderWithColor(color:CGColorRef, textField: UITextField) ->CAShapeLayer {
     let shapeLayer = CAShapeLayer();
     
