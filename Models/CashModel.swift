@@ -16,7 +16,8 @@ class CashModel: NSObject {
         let rate: NSNumber
         
         override var description: String {
-            return "Country: \(country), Rate: \(rate)\n"
+//            return "Country: \(country), Rate: \(rate)\n"
+            return " \(country), \(rate)\n"
         }
         
         init(country: String?, rate: NSNumber?) {
