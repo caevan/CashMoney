@@ -52,17 +52,23 @@ class CashViewController: UIViewController, UICollectionViewDataSource, UICollec
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         let border = CAShapeLayer()
-        let width = CGFloat(2.0)
-        border.borderColor = UIColor.darkGrayColor().CGColor
-        border.frame = CGRect(x: 0, y: txtFromCurrency.frame.size.height - width, width:  txtFromCurrency.frame.size.width, height: txtFromCurrency.frame.size.height)
-        
+        let width = CGFloat(3.0)
+        let path = CGPathCreateMutable()
+        CGPathMoveToPoint(path, nil, 0, txtFromCurrency.frame.size.height);
+        CGPathAddLineToPoint(path, nil, txtFromCurrency.frame.size.width, txtFromCurrency.frame.size.height);
+        // Add a dotted line at the bottom of the text field
+        border.path = path
+        border.borderColor = UIColor.clearColor().CGColor
+        border.frame = CGRect(x: 0, y: 0, width:  txtFromCurrency.frame.size.width, height: txtFromCurrency.frame.size.height)
+       
         border.borderWidth = width
-        border.lineDashPattern = [2, 1];
-        let newpath = UIBezierPath(rect: border.frame)
-        border.path = newpath.CGPath
-        
+        border.lineDashPattern = [4, 4];
+        border.fillColor = UIColor.clearColor().CGColor;
+        border.strokeColor = UIColor.blackColor().CGColor;
+        border.lineWidth = width;
+       
         txtFromCurrency.layer.addSublayer(border)
-        txtFromCurrency.layer.masksToBounds = true
+        txtFromCurrency.layer.masksToBounds = false
 
     }
     func RatesLoaded()
